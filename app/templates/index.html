@@ -1,31 +1,14 @@
-<!DOCTYPE html>
-<html>
+{% extends 'base.html'%}
+<!-- {% import 'macros.html' as macro%} -->
+<!-- Styles block -->
 
-<head>
-    <meta charset="utf-8">
-    {% if title %}
-    <title> {{ title }}</title>
-    {% else %}
-    <title> Welcome to the best Pitch Review website </title>
-    {% endif %}
-    {% extends 'base.html'%}
-    {% import 'macros.html' as macro%}
+{% block content %}
+<div class="container-fluid mt-3">
+  <p>Do you want to write a pitch. Sign up <a href="auth/login">here</a></p>
+  <p>Already signed in? Write a pitch <a href="/new">here</a>.</p>
+  <div class="row">
+    {{macro.displayPitchList(pitches)}}
+  </div>
+</div>
 
-    <!-- Styles block -->
-
-    {% block styles%}
-    {{ super() }}
-    <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
-    {% endblock %}
-
-</head>
-
-<body>
-
-
-    <!-- Content block -->
-
-
-</body>
-
-</html>
+{% endblock%}
