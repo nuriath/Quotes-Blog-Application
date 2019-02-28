@@ -91,7 +91,7 @@ def profile(uname):
 
     return render_template("profile/profile.html", user=user)
 
-@main.route('/new', methods=['GET', 'POST'])
+@main.route('/new/pitch', methods=['GET', 'POST'])
 @login_required
 def new_pitch():
     pitch_form = PitchForm()

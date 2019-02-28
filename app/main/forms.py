@@ -6,7 +6,7 @@ class PitchForm(FlaskForm):
 
     title = StringField('pitch title',validators=[Required()])
     content= TextAreaField('add pitch', validators=[Required()])
-    user_id = TextAreaField('author', validators=[Required()])
+    username = TextAreaField('author', validators=[Required()])
     submit = SubmitField('Submit')
 
 class CommentForm(FlaskForm):

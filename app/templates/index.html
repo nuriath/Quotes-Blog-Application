@@ -1,20 +1,23 @@
 {% extends 'base.html' %}
 {% import 'macros.html' as macro %}
 <!-- Styles block -->
-
+<link rel="stylesheet" href="{{ url_for('static', filename='static/index.css') }}">
 {% block content %}
 <div class="container-fluid mt-3">
-  <p>Already signed in? Write a pitch <a href="/new">here</a>.</p>
+
   <div class="row">
     {{macro.displayPitchList(pitch)}}
+
   </div>
+  <p>Already signed in? Write a pitch <a href="/new/pitch">here</a>.</p>
 </div>
 {% for pitch in all_pitches%}
 
 <p class="card-title">{{pitch.title}}</p>
 <!-- <p class="card-text">{{pitch.category}}</p> -->
 <p class="card-text">{{pitch.content}}</p>
-<p class="card-text">{{pitch.user_id}}</p>
+<p class="card-text">{{pitch.username}}</p>
+
 
 {% endfor %}
 
