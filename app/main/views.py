@@ -51,7 +51,11 @@ def jobs():
     jobs_pitch = Pitch.query.filter_by(category='jobs').all()
     return render_template('index.html', jobs=jobs_pitch)
     
-
+@main.route('/promotion')
+def promotion():
+    promotion_pitch = Pitch.query.filter_by(category='promotion').all()
+    return render_template('index.html', promotion=promotion_pitch)
+    
 @main.route('/user/<uname>/update',methods = ['GET','POST'])
 @login_required
 def update_profile(uname):
@@ -101,6 +105,7 @@ def new_pitch():
         content  = pitch_form.content.data
         username  = pitch_form.username.data
         category = pitch_form.category.data
+        upvote = pitch_form.category.data
         user_id = pitch_form.user_id.data
         new_pitch = Pitch(title=title,content=content,category=category,user_id=current_user.id)
         new_pitch.save_pitch() 
@@ -109,7 +114,7 @@ def new_pitch():
 
     return render_template('new_pitch.html', pitch_form=pitch_form)
 
-@main.route('/comment', methods=['GET', 'POST'])
+@main.route('/comment/new/', methods=['GET', 'POST'])
 @login_required
 def comment(id):
     comment_form = CommentForm()
@@ -118,9 +123,10 @@ def comment(id):
 
     if comment_form.validate_on_submit():
         comment = comment_form.comment.data
-        # category=category
+        category=category
         new_comment = Comment(comment=comment,user_id=user_id)
         new_comment.save_comment()
         return redirect(url_for('main.index'))
 
-    return render_template('comment.html',comment_form=comment_form,pitch=pitch)
+    return render_template('comment.html',comment_form=comment_form)
+    

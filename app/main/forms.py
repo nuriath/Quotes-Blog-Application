@@ -6,6 +6,8 @@ class PitchForm(FlaskForm):
     category = StringField('category',validators=[Required()])
     title = StringField('pitch title',validators=[Required()])
     content= TextAreaField('add pitch', validators=[Required()])
+    upvote = 
+    downvote = 
     username = TextAreaField('author', validators=[Required()])
     submit = SubmitField('Submit')
 

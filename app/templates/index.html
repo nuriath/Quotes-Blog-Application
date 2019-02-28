@@ -1,23 +1,44 @@
 {% extends 'base.html' %}
 {% import 'macros.html' as macro %}
 <!-- Styles block -->
-<link rel="stylesheet" href="{{ url_for('static', filename='static/index.css') }}">
+{% block styles%}
+{{ super() }}
+<link rel="stylesheet" href="{{url_for('static',filename='static/index.css')}}">
+{% endblock %}
 {% block content %}
 <div class="container-fluid mt-3" text-align="center">
 
-  <div class="row">
-    {{macro.displayPitchList(pitch)}}
+  <div class="selectpitch">
 
+    <a href="{{url_for('main.pickup_line')}}">Pickup Lines|</a>
+    <a href="{{url_for('main.business')}}">business Pitch|</a>
+    <a href="{{url_for('main.jobs')}}"> jobs Pitch|</a>
+    <a href="{{url_for('main.promotion')}}"> Promotion pitch</a>
+    <hr>
   </div>
-  <p>Already signed in? Write a pitch <a href="/new">here</a>.</p>
+  {{macro.displayPitchList(pitch)}}
+
+</div>
+<p>Already signed in? Write a pitch <a href="/new">here</a>.</p>
 </div>
 {% for pitch in all_pitches%}
 
-<p class="card-title">{{pitch.title}}</p>
+<p class="card-title"><strong>Category:
+  </strong>{{pitch.title}}</p>
 <!-- <p class="card-text">{{pitch.category}}</p> -->
-<p class="card-text">{{pitch.content}}</p>
-<p class="card-text">{{pitch.username}}</p>
-<p>add your comments <a href="/comment">comment</a>.</p>
+<p class="card-text"><strong>Add a pitch:</strong> {{pitch.content}}</p>
+<p class="card-text"><strong>{{pitch.user}}</strong></p>
+<p><a href='/new/comment/'>comment</a>.</p>
+<div class="voting_kochi" id="1012">
+
+  <div class="voting_btn">
+    <div class="up_button">&nbsp;</div><span class="up_votes">0</span>
+  </div>
+  <div class="voting_btn">
+    <div class="down_button">&nbsp;</div><span class="down_votes">0</span>
+  </div>
+
+</div>
 {% endfor %}
 
 
