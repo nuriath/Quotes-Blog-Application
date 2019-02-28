@@ -1,9 +1,8 @@
 from flask import render_template,request,redirect,url_for,abort
 from . import main
-from .forms import PitchForm,UpdateProfile
-from .. import db
-from ..models import  User,Pitch
-from flask_login import login_required
+from .forms import PitchForm,UpdateProfile,CommentForm
+from ..models import  User,Pitch,Comment
+from flask_login import login_required,current_user
 from .. import db,photos
 # from .models import pitch
 
@@ -20,7 +19,8 @@ def index():
     # promotion_pitch = get_movies('promotion pitch')
 
     title = 'Home- Welcome'
-    return render_template('index.html', title = title)
+    all_pitches = Pitch.get_pitches()
+    return render_template('index.html', title = title,all_pitches=all_pitches)
 
 def profile(uname):
     user = User.query.filter_by(username = uname).first()
@@ -34,14 +34,21 @@ def profile(uname):
 @main.route('/pickup_line')
 def pickup_line():
   
-    # pickup_line_pitch = Pitch.query.filter_by(category='pickup_line').all()
+    pickup_line_pitch = Pitch.query.filter_by(category='pickup_line').all()
 
     return render_template('index.html', pickup_line=pickup_line_pitch)
+
+@main.route('/business')
+def business():
+  
+    business_pitch = Pitch.query.filter_by(category='business').all()
+
+    return render_template('index.html', business=business_pitch)
 
 
 @main.route('/jobs')
 def jobs():
-
+    jobs_pitch = Pitch.query.filter_by(category='jobs').all()
     return render_template('index.html', jobs=jobs_pitch)
     
 
@@ -94,10 +101,25 @@ def new_pitch():
         content  = pitch_form.content.data
         # category = pitch_form.category.data
         user_id = pitch_form.user_id.data
-        new_pitch = Pitch(title=title,content=content,user_id=user_id)
-
-        db.session.add(new_pitch)
-        db.session.commit()
+        new_pitch = Pitch(title=title,content=content,user_id=current_user.id)
+        new_pitch.save_pitch() 
+    
         return redirect(url_for('main.index'))
 
     return render_template('new_pitch.html', pitch_form=pitch_form)
+
+@main.route('/comment/<int:id>', methods=['GET', 'POST'])
+@login_required
+def comment(id):
+    comment_form = CommentForm()
+    
+    pitch = Pitch.query.get(id)
+
+    if comment_form.validate_on_submit():
+        comment = comment_form.comment.data
+        # category=category
+        new_comment = Comment(comment=comment,user_id=user_id)
+        new_comment.save_comment()
+        return redirect(url_for('main.index'))
+
+    return render_template('comment.html',comment_form=comment_form,pitch=pitch)

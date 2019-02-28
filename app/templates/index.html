@@ -6,8 +6,16 @@
 <div class="container-fluid mt-3">
   <p>Already signed in? Write a pitch <a href="/new">here</a>.</p>
   <div class="row">
-    {{macro.displayPitchList(pitches)}}
+    {{macro.displayPitchList(pitch)}}
   </div>
 </div>
+{% for pitch in all_pitches%}
+
+<p class="card-title">{{pitch.title}}</p>
+<!-- <p class="card-text">{{pitch.category}}</p> -->
+<p class="card-text">{{pitch.content}}</p>
+<p class="card-text">{{pitch.user_id}}</p>
+
+{% endfor %}
 
 {% endblock%}
