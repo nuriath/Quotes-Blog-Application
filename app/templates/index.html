@@ -3,13 +3,13 @@
 <!-- Styles block -->
 <link rel="stylesheet" href="{{ url_for('static', filename='static/index.css') }}">
 {% block content %}
-<div class="container-fluid mt-3">
+<div class="container-fluid mt-3" text-align="center">
 
   <div class="row">
     {{macro.displayPitchList(pitch)}}
 
   </div>
-  <p>Already signed in? Write a pitch <a href="/new/pitch">here</a>.</p>
+  <p>Already signed in? Write a pitch <a href="/new">here</a>.</p>
 </div>
 {% for pitch in all_pitches%}
 
@@ -17,8 +17,8 @@
 <!-- <p class="card-text">{{pitch.category}}</p> -->
 <p class="card-text">{{pitch.content}}</p>
 <p class="card-text">{{pitch.username}}</p>
-
-
+<p>add your comments <a href="/comment">comment</a>.</p>
 {% endfor %}
+
 
 {% endblock%}

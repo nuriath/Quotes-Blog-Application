@@ -43,13 +43,14 @@ class Pitch(db.Model):
     id = db.Column(db.Integer,primary_key = True)
     title = db.Column(db.String(255))
     content = db.Column(db.String(255))
+    category = db.Column(db.String(255))
     user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
     comment = db.relationship('Comment',backref = 'pitch',lazy="dynamic")
 
     def save_pitch(self):
         db.session.add(self)
         db.session.commit()
-        
+
     @classmethod
     def get_pitches(id):
         pitches = Pitch.query.all()

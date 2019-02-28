@@ -91,24 +91,25 @@ def profile(uname):
 
     return render_template("profile/profile.html", user=user)
 
-@main.route('/new/pitch', methods=['GET', 'POST'])
+@main.route('/new', methods=['GET', 'POST'])
 @login_required
 def new_pitch():
     pitch_form = PitchForm()
-
+    
     if pitch_form.validate_on_submit():
         title = pitch_form.title.data
         content  = pitch_form.content.data
-        # category = pitch_form.category.data
+        username  = pitch_form.username.data
+        category = pitch_form.category.data
         user_id = pitch_form.user_id.data
-        new_pitch = Pitch(title=title,content=content,user_id=current_user.id)
+        new_pitch = Pitch(title=title,content=content,category=category,user_id=current_user.id)
         new_pitch.save_pitch() 
     
         return redirect(url_for('main.index'))
 
     return render_template('new_pitch.html', pitch_form=pitch_form)
 
-@main.route('/comment/<int:id>', methods=['GET', 'POST'])
+@main.route('/comment', methods=['GET', 'POST'])
 @login_required
 def comment(id):
     comment_form = CommentForm()
