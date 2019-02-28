@@ -5,10 +5,10 @@ from .. import db
 from ..models import  User,Pitch
 from flask_login import login_required
 from .. import db,photos
-from .models import pitch
+# from .models import pitch
 
 
-Pitch = pitch.Pitch
+# Pitch = pitch.Pitch
 
 @main.route('/')
 def index():
@@ -30,18 +30,17 @@ def profile(uname):
 
     return render_template("profile/profile.html", user = user)
 
+
 @main.route('/pickup_line')
 def pickup_line():
   
-    pickup_line_pitch = Pitch.query.filter_by(category='pickup_line').all()
+    # pickup_line_pitch = Pitch.query.filter_by(category='pickup_line').all()
 
     return render_template('index.html', pickup_line=pickup_line_pitch)
 
 
 @main.route('/jobs')
 def jobs():
-
-    jobs_pitch = Pitch.query.filter_by(category='jobs').all()
 
     return render_template('index.html', jobs=jobs_pitch)
     
@@ -93,9 +92,12 @@ def new_pitch():
     if pitch_form.validate_on_submit():
         title = pitch_form.title.data
         content  = pitch_form.content.data
-        
-        new_pitch = Pitch(title=title,content=content, user_id=current_user.id)
-        new_pitch.save_pitches()
+        # category = pitch_form.category.data
+        user_id = pitch_form.user_id.data
+        new_pitch = Pitch(title=title,content=content,user_id=user_id)
+
+        db.session.add(new_pitch)
+        db.session.commit()
         return redirect(url_for('main.index'))
 
     return render_template('new_pitch.html', pitch_form=pitch_form)
