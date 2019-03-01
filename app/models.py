@@ -13,12 +13,10 @@ class User(UserMixin,db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer,primary_key = True)
     username = db.Column(db.String(255))
+    email = db.Column(db.String(255),unique = True,index = True)
     post = db.relationship('Post',backref = 'user',lazy="dynamic")
     comment = db.relationship('Comment',backref = 'user',lazy="dynamic")
-    email = db.Column(db.String(255),unique = True,index = True)
     pass_secure  = db.Column(db.String(255))
-
-
    
     @property
     def password(self):
@@ -37,10 +35,9 @@ class User(UserMixin,db.Model):
     
 class Post(db.Model):
     __tablename__ = 'post'
-
+    author = db.Column(db.String(255))
     id = db.Column(db.Integer,primary_key = True)
-    title = db.Column(db.String(255))
-    content = db.Column(db.String(255))
+    quote = db.Column(db.String(1250))
     update = db.Column(db.Integer)
     user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
     comment = db.relationship('Comment',backref = 'post',lazy="dynamic")
