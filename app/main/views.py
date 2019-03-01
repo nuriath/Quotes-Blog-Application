@@ -26,30 +26,30 @@ def profile(uname):
     return render_template("profile/profile.html", user = user)
 
 
-# @main.route('/pickup_line')
-# def pickup_line():
+@main.route('/pickup_line')
+def pickup_line():
   
-#     pickup_line_pitch = Pitch.query.filter_by(category='pickup_line').all()
+    pickup_line_pitch = Pitch.query.filter_by(category='pickup_line').all()
 
-#     return render_template('index.html', pickup_line=pickup_line_pitch)
+    return render_template('index.html', pickup_line=pickup_line_pitch)
 
-# @main.route('/business')
-# def business():
+@main.route('/business')
+def business():
   
-#     business_pitch = Pitch.query.filter_by(category='business').all()
+    business_pitch = Pitch.query.filter_by(category='business').all()
 
-#     return render_template('index.html', business=business_pitch)
+    return render_template('index.html', business=business_pitch)
 
 
-# @main.route('/jobs')
-# def jobs():
-#     jobs_pitch = Pitch.query.filter_by(category='jobs').all()
-#     return render_template('index.html', jobs=jobs_pitch)
+@main.route('/jobs')
+def jobs():
+    jobs_pitch = Pitch.query.filter_by(category='jobs').all()
+    return render_template('index.html', jobs=jobs_pitch)
     
-# @main.route('/promotion')
-# def promotion():
-#     promotion_pitch = Pitch.query.filter_by(category='promotion').all()
-#     return render_template('index.html', promotion=promotion_pitch)
+@main.route('/promotion')
+def promotion():
+    promotion_pitch = Pitch.query.filter_by(category='promotion').all()
+    return render_template('index.html', promotion=promotion_pitch)
     
 @main.route('/user/<uname>/update',methods = ['GET','POST'])
 @login_required

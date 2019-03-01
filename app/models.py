@@ -43,7 +43,7 @@ class Post(db.Model):
     content = db.Column(db.String(255))
     update = db.Column(db.Integer)
     user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
-    comment = db.relationship('Comment',backref = 'pitch',lazy="dynamic")
+    comment = db.relationship('Comment',backref = 'post',lazy="dynamic")
 
     def save_post(self):
         db.session.add(self)
@@ -63,9 +63,9 @@ class Comment(db.Model):
 
     id = db.Column(db.Integer,primary_key = True)
     comment= db.Column(db.String(255))
-    post_id = db.Column(db.Integer,db.ForeignKey('pitch.id'))
+    post_id = db.Column(db.Integer,db.ForeignKey('post.id'))
     user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
-    
+
     def __repr__(self):
         return f'User {self.name}'
 

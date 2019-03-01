@@ -16,29 +16,29 @@
     <a href="{{url_for('main.promotion')}}"> Promotion pitch</a>
     <hr>
   </div> -->
-  {{macro.displayPitchList(pitch)}}
+  {{macro.displayPostList(post)}}
 
 </div>
-<p>Already signed in? Write a pitch <a href="/new">here</a>.</p>
+<h1 id="quote">QUOTES BLOG</h1>
 </div>
-{% for pitch in all_pitches%}
+{% for post in all_posts%}
 
-<p class="card-title"><strong>Category:
-  </strong>{{pitch.title}}</p>
+<p class="card-title"><strong>Quotes:
+  </strong>{{post.title}}</p>
 <!-- <p class="card-text">{{pitch.category}}</p> -->
-<p class="card-text"><strong>Add a pitch:</strong> {{pitch.content}}</p>
-<p class="card-text"><strong>{{pitch.user}}</strong></p>
+<p class="card-text"><strong>Add a post:</strong> {{post.content}}</p>
+<p class="card-text"><strong>{{post.user}}</strong></p>
 <p><a href='/new/comment/'>comment</a>.</p>
 <div class="voting_kochi" id="1012">
 
-  <div class="voting_btn">
+  <!-- <div class="voting_btn">
     <div class="up_button">&nbsp;</div><span class="up_votes">upvotes :0</span>
   </div>
   <div class="voting_btn">
     <div class="down_button">&nbsp;</div><span class="down_votes">downvotes:0</span>
   </div>
 
-</div>
+</div> -->
 {% endfor %}
 
 
