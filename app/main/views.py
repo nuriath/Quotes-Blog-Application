@@ -14,8 +14,8 @@ def index():
     """ View root page function that returns index page """
 
     title = 'Home- Quotes Blog'
-    all_pitches = Pitch.get_pitches()
-    return render_template('index.html', title = title,all_pitches=all_pitches)
+    # all_posts = Post.get_posts()
+    return render_template('index.html', title = title,)
 
 def profile(uname):
     user = User.query.filter_by(username = uname).first()
