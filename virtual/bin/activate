@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/home/wecode/Desktop/Pitch-web-app/virtual"
+VIRTUAL_ENV="/home/wecode/Documents/Quotes-Blog-Application/virtual"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

@@ -1,4 +1,4 @@
-#!/home/wecode/Desktop/Pitch-web-app/virtual/bin/python
+#!/home/wecode/Documents/Quotes-Blog-Application/virtual/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys

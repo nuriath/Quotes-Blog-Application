@@ -13,11 +13,9 @@ class User(UserMixin,db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer,primary_key = True)
     username = db.Column(db.String(255))
-    pitch = db.relationship('Pitch',backref = 'user',lazy="dynamic")
+    post = db.relationship('Post',backref = 'user',lazy="dynamic")
     comment = db.relationship('Comment',backref = 'user',lazy="dynamic")
     email = db.Column(db.String(255),unique = True,index = True)
-    bio = db.Column(db.String(255))
-    profile_pic_path = db.Column(db.String())
     pass_secure  = db.Column(db.String(255))
 
 
@@ -37,26 +35,24 @@ class User(UserMixin,db.Model):
         return f'User {self.username}'
         
     
-class Pitch(db.Model):
-    __tablename__ = 'pitch'
+class Post(db.Model):
+    __tablename__ = 'post'
 
     id = db.Column(db.Integer,primary_key = True)
     title = db.Column(db.String(255))
     content = db.Column(db.String(255))
-    category = db.Column(db.String(255))
-    upvote = db.Column(db.Integer)
-    downvote = db.Column(db.Integer)
+    update = db.Column(db.Integer)
     user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
     comment = db.relationship('Comment',backref = 'pitch',lazy="dynamic")
 
-    def save_pitch(self):
+    def save_post(self):
         db.session.add(self)
         db.session.commit()
 
     @classmethod
-    def get_pitches(id):
-        pitches = Pitch.query.all()
-        return pitches
+    def get_post(id):
+        posts = Post.query.all()
+        return posts
 
     def __repr__(self):
         return f'User {self.name}'
@@ -66,12 +62,13 @@ class Comment(db.Model):
     __tablename__ = 'comments'
 
     id = db.Column(db.Integer,primary_key = True)
-    description= db.Column(db.String(255))
-    pitch_id = db.Column(db.Integer,db.ForeignKey('pitch.id'))
+    comment= db.Column(db.String(255))
+    post_id = db.Column(db.Integer,db.ForeignKey('pitch.id'))
     user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
+    
     def __repr__(self):
         return f'User {self.name}'
 
-    def save_pitch(self):
+    def save_commet(self):
        db.session.add(self)
        db.session.commit()
