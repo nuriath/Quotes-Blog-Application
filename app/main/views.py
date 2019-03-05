@@ -11,8 +11,10 @@ def index():
     """ View root page function that returns index page """
 
     title = 'Home- Quotes Blog'
-    # all_posts = Post.get_posts()
-    return render_template('index.html', title = title,)
+  
+    all_blogs = Post.query.all()
+    quote=get_quotes()
+    return render_template('index.html', title = title,all_blogs=all_blogs, quote= quote)
 
 def profile(uname):
     user = User.query.filter_by(username = uname).first()
@@ -74,6 +76,9 @@ def new_post():
         new_post.save_posts() 
     
         return redirect(url_for('main.index'))
+
+        db.session.add(post)
+        db.session.commit()
 
     return render_template('new_post.html', post_form=post_form)
 

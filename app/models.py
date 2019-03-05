@@ -68,7 +68,7 @@ class Post(db.Model):
     post = db.Column(db.String(1250))
     update = db.Column(db.Integer)
     user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
-    comment = db.relationship('Comment',backref = 'post',lazy="dynamic")
+    comment = db.relationship('Comment',backref = 'posts',lazy="dynamic")
 
     def save_post(self):
         db.session.add(self)
@@ -107,7 +107,7 @@ class Comment(db.Model):
     
 
 class Subscribe(db.Model):
-    __tablename__= 'subscribe'
+    __tablename__= 'subscribes'
 
     id = db.Column(db.Integer,primary_key = True)
     email= db.Column(db.String(255))
