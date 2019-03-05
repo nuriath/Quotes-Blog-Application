@@ -27,4 +27,6 @@ This is a blog application, where we can see defferent quotes.
 
 - Link:'https://github.com/nuriath/Quotes-Blog-Application'
 
+## LICENCE & COPYRIGHT
 
+(C) Mwangaza Nuriath, MIT Licence 2019
