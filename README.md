@@ -22,3 +22,9 @@ This is a blog application, where we can see defferent quotes.
 ## CONTRIBUTOR
 
 - Mwangaza Nuriath
+
+## RELATIVE LINK 
+
+- Link:'https://github.com/nuriath/Quotes-Blog-Application'
+
+
