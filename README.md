@@ -14,3 +14,11 @@ This is a blog application, where we can see defferent quotes.
 - Visual Studio Code 
 
 - Terminal
+
+## CONTACT
+
+- E-mail: mnuriath28@gmail.com
+
+## CONTRIBUTOR
+
+- Mwangaza Nuriath
