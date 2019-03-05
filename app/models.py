@@ -102,7 +102,7 @@ class Comment(db.Model):
     @classmethod
     def get_comments(id):
         comments = Comment.query.all()
-       return comments
+        return comments
 
     
 

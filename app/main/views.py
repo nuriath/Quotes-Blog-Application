@@ -6,9 +6,6 @@ from flask_login import login_required,current_user
 from .. import db,photos
 from ..request import get_posts
 
-
-# Pitch = pitch.Pitch
-
 @main.route('/')
 def index():
     """ View root page function that returns index page """
@@ -64,21 +61,21 @@ def profile(uname):
 
     return render_template("profile/profile.html", user=user)
 
-@main.route('/new_blog', methods=['GET', 'POST'])
+@main.route('/new_post', methods=['GET', 'POST'])
 @login_required
-def new_blog():
-    blog_form = BlogForm()
+def new_post():
+    post_form = PostForm()
     
-    if blog_form.validate_on_submit():
+    if post_form.validate_on_submit():
         
-        blog = blog_form.blog.data
-        # user_id = blog_form.user_id.data
-        new_blog = Blog(blog=blog,user_id=current_user.id)
-        new_blog.save_blogs() 
+        post = post_form.post.data
+        # user_id = post_form.user_id.data
+        new_post = Post(post=post,user_id=current_user.id)
+        new_post.save_posts() 
     
         return redirect(url_for('main.index'))
 
-    return render_template('new_blog.html', blog_form=blog_form)
+    return render_template('new_post.html', post_form=post_form)
 
 @main.route('/comment/new/<int:id>', methods=['GET', 'POST'])
 @login_required

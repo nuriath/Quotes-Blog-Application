@@ -3,9 +3,9 @@ from wtforms import StringField,TextAreaField,SubmitField
 from wtforms.validators import Required,Email
 from ..models import Subscribe
 
-class BlogForm(FlaskForm):
+class PostForm(FlaskForm):
    
-    blog = TextAreaField('blog',validators=[Required()])
+    blog = TextAreaField('post',validators=[Required()])
     submit = SubmitField('Submit')
 
 class CommentForm(FlaskForm):
