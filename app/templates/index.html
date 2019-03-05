@@ -1,48 +1,51 @@
 {% extends 'base.html' %}
 {% import 'macros.html' as macro %}
-<!-- Styles block -->
+{% import 'bootstrap/wtf.html' as wtf%}
+
 {% block styles%}
 {{ super() }}
 <link rel="stylesheet" href="{{url_for('static',filename='index.css')}}">
+<link href="https://fonts.googleapis.com/css?family=Laila" rel="stylesheet">
 {% endblock %}
-<body>
 {% block content %}
-<div class="container-fluid mt-3" text-align="center">
-
-  <!-- <div class="selectpitch">
-
-    <a href="{{url_for('main.pickup_line')}}">Pickup Lines|</a>
-    <a href="{{url_for('main.business')}}">Business Pitch|</a>
-    <a href="{{url_for('main.jobs')}}"> Jobs Pitch|</a>
-    <a href="{{url_for('main.promotion')}}"> Promotion pitch</a>
-    <hr>
-  </div> -->
-  {{macro.displayPostList(post)}}
-
-</div>
-<h1 id="quote">Quotes Blog</h1>
-</div>
-{% for post in all_posts%}
-
-<p class="card-title"><strong>Quotes:
-  </strong>{{post.title}}</p>
-<!-- <p class="card-text">{{pitch.category}}</p> -->
-<p class="card-text"><strong>Add a post:</strong> {{post.content}}</p>
-<p class="card-text"><strong>{{post.user}}</strong></p>
-<p><a href='/new/comment/'>comment</a>.</p>
-<div class="voting_kochi" id="1012">
-
-  <!-- <div class="voting_btn">
-    <div class="up_button">&nbsp;</div><span class="up_votes">upvotes :0</span>
-  </div>
-  <div class="voting_btn">
-    <div class="down_button">&nbsp;</div><span class="down_votes">downvotes:0</span>
+<blockquote class="text-center text-lg">
+  <h2>Inspirational Quotes</h2>
+  <p>{{post.post}}</p>
+  <p class="sab">Author: {{post.author}}</p>
+  <br><br>
+  <div class="container-fluid container">
+    <h1 style='text-align:center;'>Welcome to my post web App</h1>
   </div>
 
-</div> -->
-{% endfor %}
 
+  <a class="btn btn-primary btn md" href="/new_post">Add a new post</a>
+  <a class="btn btn-primary btn md" href="/subscribe" style="float:center;">subscribe</a>
+  {% for post in all_posts %}
+  <div class="container-fluid">
+    <div class="card-deck">
+      <div class="card">
+        <div class="card-body">
 
-{% endblock%}
+          <p>{{post.post}}</p>
 
-</body>
+        </div>
+        <div class="card-header" style='text-align:center;'>
+          <h5>{{post.user}}</h5>
+        </div>
+
+        <br>
+        <div class="card-footer">
+          <div class="container-fluid write">
+            <a class="btn btn-primary btn-md" href="/comment/new/{{post.id}}">Write comment</a>
+            <a class="btn btn-primary btn-md" href="/delpost/{{post.id}}">Delete comment</a>
+
+          </div>
+        </div>
+      </div>
+      <br>
+    </div>
+  </div>
+
+  {% endfor %}
+  </div>
+  {% endblock%}
