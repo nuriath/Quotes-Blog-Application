@@ -4,7 +4,7 @@ from .forms import PostForm,UpdateProfile,CommentForm,SubscribeForm
 from ..models import  User,Post,Comment,Subscribe
 from flask_login import login_required,current_user
 from .. import db,photos
-from ..request import get_posts
+from ..request import get_quote
 
 @main.route('/')
 def index():
@@ -12,9 +12,9 @@ def index():
 
     title = 'Home- Quotes Blog'
   
-    all_blogs = Post.query.all()
-    quote=get_quotes()
-    return render_template('index.html', title = title,all_blogs=all_blogs, quote= quote)
+    all_posts = Post.query.all()
+    quote=get_quote()
+    return render_template('index.html', title = title, all_posts= all_posts, quote= quote)
 
 def profile(uname):
     user = User.query.filter_by(username = uname).first()
@@ -73,12 +73,9 @@ def new_post():
         post = post_form.post.data
         # user_id = post_form.user_id.data
         new_post = Post(post=post,user_id=current_user.id)
-        new_post.save_posts() 
+        new_post.save_post() 
     
         return redirect(url_for('main.index'))
-
-        db.session.add(post)
-        db.session.commit()
 
     return render_template('new_post.html', post_form=post_form)
 
@@ -87,24 +84,15 @@ def new_post():
 def comment(id):
     comment_form = CommentForm()
     
-    blog= Blog.query.filter_by(id=id).first()
+    post= Post.query.filter_by(id=id).first()
     if comment_form.validate_on_submit():
-        description = comment_form.description.data
+        comment = comment_form.comment.data
         # user_id = comment_form.user_id.data
-        new_comment = Comment(description=description, blogs_id  = id, user_id=current_user.id)
-        new_comment.save_comments()
-        new_comment.delete_comments()
+        new_comment = Comment(comment=comment, post_id  = id, user_id=current_user.id)
+        new_comment.save_comment()
         return redirect(url_for('main.index'))
 
-    return render_template('comment.html',comment_form=comment_form, blog= blog)
-
-@main.route('/vote', methods=['POST'])
-def vote():
-    data = simplejson.loads(request.data)
-    update_item(c, [data['member']])
-    output = select_all_items(c, [data['member']])
-    pusher.trigger(u'poll', u'vote', output)
-    return request.data
+    return render_template('comment.html',comment_form=comment_form, post= post)
 
 @main.route('/subscribe',methods=["GET","POST"])
 def subscribe():

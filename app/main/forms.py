@@ -5,7 +5,7 @@ from ..models import Subscribe
 
 class PostForm(FlaskForm):
    
-    blog = TextAreaField('post',validators=[Required()])
+    post= TextAreaField('post',validators=[Required()])
     submit = SubmitField('Submit')
 
 class CommentForm(FlaskForm):

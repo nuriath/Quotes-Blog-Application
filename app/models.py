@@ -10,7 +10,7 @@ def load_user(user_id):
 
 class Quote:
 
-    all_quotes = []
+    # all_quotes = []
 
     def __init__(self,id,author,quote):
         self.id =id
@@ -18,24 +18,24 @@ class Quote:
         self.quote = quote
      
         
-    def save_quotes(self):
-       Quote.all_quotes.append(self)
+    # def save_quotes(self):
+    #    Quote.all_quotes.append(self)
 
 
-    @classmethod
-    def clear_quotes(cls):
-       Post.all_quotes.clear()
+    # @classmethod
+    # def clear_quotes(cls):
+    #    Post.all_quotes.clear()
 
-    @classmethod
-    def get_quotes(cls,id):
+    # @classmethod
+    # def get_quotes(cls,id):
 
-        response = []
+    #     response = []
 
-        for Quote in cls.all_quotes:
-            if Quote.user_id == id:
-                response.append(quote)
+    #     for Quote in cls.all_quotes:
+    #         if Quote.user_id == id:
+    #             response.append(quote)
 
-        return response
+    #     return response
 
 class User(UserMixin,db.Model):
     __tablename__ = 'users'
@@ -91,11 +91,7 @@ class Comment(db.Model):
     post_id = db.Column(db.Integer,db.ForeignKey('posts.id'))
     user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
 
-    def save_commet(self):
-        db.session.add(self)
-        db.session.commit()
-
-    def delete_comments(self):
+    def save_comment(self):
         db.session.add(self)
         db.session.commit()
 
@@ -103,8 +99,6 @@ class Comment(db.Model):
     def get_comments(id):
         comments = Comment.query.all()
         return comments
-
-    
 
 class Subscribe(db.Model):
     __tablename__= 'subscribes'
