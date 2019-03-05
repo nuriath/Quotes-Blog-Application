@@ -1,0 +1,5 @@
+# QUOTES BLOG APPLICATION
+
+## AUTHER NAME
+
+  Mwangaza Nuriath
