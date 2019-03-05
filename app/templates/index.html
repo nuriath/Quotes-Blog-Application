@@ -8,19 +8,23 @@
 <link href="https://fonts.googleapis.com/css?family=Laila" rel="stylesheet">
 {% endblock %}
 {% block content %}
+<div class="container-fluid container">
+    <h1 style='text-align:center;'>Welcome to my post blog web App</h1>
+  </div>
+      <br>
 <blockquote class="text-center text-lg">
   <h2>Inspirational Quotes</h2>
   <p>{{quote.quote}}</p>
   <p class="sab">Author: {{quote.author}}</p>
   <br><br>
-  <div class="container-fluid container">
-    <h1 style='text-align:center;'>Welcome to my post blog web App</h1>
-  </div>
-
+ 
+       
 
   <a class="btn btn-primary btn md" href="/new_post">Add a new post</a>
   <a class="btn btn-primary btn md" href="/subscribe" style="float:center;">subscribe</a>
+  <br>
   {% for post in all_posts %}
+  <br>
   <div class="container-fluid">
     <div class="card-deck">
       <div class="card">
@@ -28,6 +32,7 @@
           <p>{{post.post}}</p>
         </div>
         <div class="card-header" style='text-align:center;'>
+          <br>
           <h5>{{post.user}}</h5>
         </div>
         <br>

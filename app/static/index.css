@@ -3,13 +3,16 @@ body{
 }
 
 h1{
-  display: inline; /* the default for span */
+  display: inline; 
   width: 100px;
   height: 100px;
-  padding: 5px;
-  margin-left: 200px;
-  border:3px solid rgb(15, 15, 19); 
-  background-color: rgb(192, 192, 189);
-  font-size: 70px;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 30px;
+  padding-bottom: 40px;
+  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXcwv-ZJSy4OtsblGtSVGwPZw8z7u-Fni9JDCOkP3ZTD5hfAQtPw");
+  background-repeat: no-repeat;
+  background-size: cover; 
+  font-size: 50px;
  
 }
