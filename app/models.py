@@ -7,32 +7,33 @@ from datetime import datetime
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
-class Post:
 
-    all_posts = []
+class Quote:
 
-    def __init__(self,id,author,post):
+    all_quotes = []
+
+    def __init__(self,id,author,quote):
         self.id =id
         self.author = author
-        self.post = post
+        self.quote = quote
      
         
-    def save_posts(self):
-       Post.all_posts.append(self)
+    def save_quotes(self):
+       Quote.all_quotes.append(self)
 
 
     @classmethod
-    def clear_posts(cls):
-       Post.all_posts.clear()
+    def clear_quotes(cls):
+       Post.all_quotes.clear()
 
     @classmethod
-    def get_posts(cls,id):
+    def get_quotes(cls,id):
 
         response = []
 
-        for Post in cls.all_posts:
-            if Post.user_id == id:
-                response.append(post)
+        for Quote in cls.all_quotes:
+            if Quote.user_id == id:
+                response.append(quote)
 
         return response
 
@@ -43,7 +44,6 @@ class User(UserMixin,db.Model):
     email = db.Column(db.String(255),unique = True,index = True)
     post = db.relationship('Post',backref = 'user',lazy="dynamic")
     comment = db.relationship('Comment',backref = 'user',lazy="dynamic")
-    profile_pic_path = db.Column(db.String(255))
     pass_secure  = db.Column(db.String(255))
    
     @property
@@ -88,7 +88,7 @@ class Comment(db.Model):
 
     id = db.Column(db.Integer,primary_key = True)
     comment= db.Column(db.String(255))
-    post_id = db.Column(db.Integer,db.ForeignKey('post.id'))
+    post_id = db.Column(db.Integer,db.ForeignKey('posts.id'))
     user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
 
     def save_commet(self):

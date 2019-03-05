@@ -4,8 +4,8 @@ from . import mail
 
 subject_pref = "Quotes Blog"
 def mail_message(subject,template,to,**kwargs):
-sender_email = "mnuriath28@gmail.com"
-sender_password ="J0786154788"
+    sender_email = "mnuriath28@gmail.com"
+    sender_password ="J0786154788"
 
 
     
