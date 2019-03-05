@@ -1,12 +1,11 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField,TextAreaField,SubmitField
-from wtforms.validators import Required
+from wtforms.validators import Required,Email
+from ..models import Subscribe
 
-class PitchForm(FlaskForm):
-    category = StringField('category',validators=[Required()])
-    title = StringField('pitch title',validators=[Required()])
-    content= TextAreaField('add pitch', validators=[Required()])
-    username = TextAreaField('author', validators=[Required()])
+class BlogForm(FlaskForm):
+   
+    blog = TextAreaField('blog',validators=[Required()])
     submit = SubmitField('Submit')
 
 class CommentForm(FlaskForm):
@@ -16,4 +15,8 @@ class CommentForm(FlaskForm):
 
 class UpdateProfile(FlaskForm):
     bio = TextAreaField('Tell us about you.',validators = [Required()])
+    submit = SubmitField('Submit')
+
+class SubscribeForm(FlaskForm):
+    email = StringField('Your Email Address',validators=[Required(),Email()])
     submit = SubmitField('Submit')
