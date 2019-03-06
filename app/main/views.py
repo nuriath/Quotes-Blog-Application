@@ -109,13 +109,13 @@ def subscribe():
         title = 'Subscribe'
     return render_template('subscribe.html',form=form)
 
-@main.route('/delblog/<id>')
-def delblog(id):
-    
-    blog = Blog.query.filter_by(id = id).first()
-    db.session.delete(blog)
-    db.session.commit()
-    print(blog)
-    title = 'delete blogs'
-    return render_template('index.html',title = title, blog = blog)
+@main.route('/delete/<int:id>', methods=['GET','POST'])
+def delete(id):
+    comment = Comment.query.filter_by(id=id).first()
+    form = CommentForm()
+    if comment is not None:
+        comment.delete()
+        return redirect (url_for('main.index'))
+        
+    return render_template('comment.html', form = form)
 

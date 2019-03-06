@@ -100,6 +100,11 @@ class Comment(db.Model):
         comments = Comment.query.all()
         return comments
 
+    def delete(self):
+       db.session.delete(self)
+       db.session.commit()
+
+
 class Subscribe(db.Model):
     __tablename__= 'subscribes'
 
